@@ -1,2 +1,2 @@
 *.wav
-*.xcodeproj
+.gitignore
