@@ -9,8 +9,9 @@ import SwiftUI
 
 struct MenuView: View {
     @State var Genres: [String] = ["大学", "パソコン"]
-    @State var genre: String = ""
+    @AppStorage("genre") var genre: String = ""
     @State var open: Bool = false
+    @State var newdata: String = ""
     var body: some View {
         NavigationView{
             VStack{

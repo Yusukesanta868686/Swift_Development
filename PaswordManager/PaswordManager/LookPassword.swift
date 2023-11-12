@@ -8,12 +8,45 @@
 import SwiftUI
 
 struct LookPassword: View {
-    var Mypasswords: [String: [String: String]] = [:]
+    @AppStorage("genre") var genre: String = ""
+    let storage = PasswordStorage()
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            VStack{
+                Text("パスワード一覧")
+                let passwords = storage.fetchData(forGenre: genre)
+                
+                List(passwords){passdata in
+                    HStack{
+                        Text("\(passdata.name)")
+                        Text("\(passdata.password)")
+                    }
+                }
+            }
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing){
+                    NavigationLink{
+                        AddPasswordView()
+                    }label: {
+                        Text("パスワードを追加")
+                    }
+                }
+            }
+            .toolbar{
+                ToolbarItem(placement: .navigationBarLeading){
+                    NavigationLink{
+                        MenuView()
+                    }label: {
+                        Text("メニューに戻る")
+                    }
+                }
+            }
+            
+        }
     }
 }
+
 
 #Preview {
     LookPassword()
